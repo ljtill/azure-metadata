@@ -1,7 +1,7 @@
 @{
     # Modules bundled with the PowerShell Language Worker
-    'Az' = @{
-        Version = 'latest'
-        Target = 'Modules'
-    }
+    #'Coin' = @{
+        #Version = 'latest'
+        #Target = 'Modules'
+    #}
 }
