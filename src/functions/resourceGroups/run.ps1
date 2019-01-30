@@ -17,16 +17,19 @@ function Invoke-Trigger {
 
     begin {
         Write-Verbose -Message "PowerShell HTTP trigger function processed a request." -Verbose
-    
-        $pass = ConvertTo-SecureString $env:SECRET -AsPlainText -Force
-        $cred = New-Object -TypeName pscredential -ArgumentList $env:APPLICATIONID, $pass
-        Connect-AzAccount -ServicePrincipal -Tenant $env:TENANTID -Credential $cred
+        try {
+            $azureClientSecret = ConvertTo-SecureString $env:AzureClientSecret -AsPlainText -Force
+            $azureCredential = New-Object -TypeName pscredential -ArgumentList $env:AzureClientId, $azureClientSecret
+            Connect-AzAccount -ServicePrincipal -Tenant $env:AzureTenantId -Credential $azureCredential
+        }
+        catch {
+            Write-Warning -Message "PowerShell HTTP trigger function encountered an error."
+            Write-Error $_
+            return
+        }
     }
     
     process {
-        $pass = ConvertTo-SecureString $env:SECRET -AsPlainText -Force
-        $cred = New-Object -TypeName pscredential -ArgumentList $env:APPLICATIONID, $pass
-        Connect-AzAccount -ServicePrincipal -Tenant $env:TENANTID -Credential $cred
     }
     
     end {
