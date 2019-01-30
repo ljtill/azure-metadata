@@ -20,7 +20,7 @@ function Invoke-Trigger {
         try {
             $azureClientSecret = ConvertTo-SecureString $env:AzureClientSecret -AsPlainText -Force
             $azureCredential = New-Object -TypeName pscredential -ArgumentList $env:AzureClientId, $azureClientSecret
-            Connect-AzAccount -ServicePrincipal -Tenant $env:AzureTenantId -Credential $azureCredential
+            Connect-AzAccount -ServicePrincipal -Tenant $env:AzureTenantId -Credential $azureCredential | Out-Null
         }
         catch {
             Write-Warning -Message "PowerShell HTTP trigger function encountered an error."
