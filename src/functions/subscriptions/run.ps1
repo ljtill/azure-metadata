@@ -19,9 +19,6 @@ function Invoke-Trigger {
         Write-Verbose -Message "PowerShell HTTP trigger function processed a request." -Verbose
         try {
             Write-Verbose -Message "Azure authentication processed a request." -Verbose
-            #$azureClientSecret = ConvertTo-SecureString $env:AzureClientSecret -AsPlainText -Force
-            #$azureCredential = New-Object -TypeName pscredential -ArgumentList $env:AzureClientId, $azureClientSecret
-            #Connect-AzAccount -ServicePrincipal -Tenant $env:AzureTenantId -Credential $azureCredential | Out-Null
             Write-Verbose -Message "Azure authentication completed a request." -Verbose
         }
         catch {
